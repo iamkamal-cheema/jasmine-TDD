@@ -108,11 +108,32 @@ $(function() {
 
     }); 
 
-    /* TODO: Write a new test suite named "New Feed Selection"
+    // TODO: Write a new test suite named "New Feed Selection"
 
-        /* TODO: Write a test that ensures when a new feed is loaded
+    describe('New Feed Selection', function() {  
+        
+
+    
+        // Test that ensures when a new feed is loaded by the loadFeed function that the content actually changes.
+        // loadFeed is asynchronous so we're using Jasmine's beforeEach and done functions again.
+        beforeEach(function(done) {
+            loadFeed(1, function() {
+                feedContent = $('.feed').html();
+                done();
+            });
+        });
+
+    /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+
+        it('updates content on addition of new feed', function(done) {
+            loadFeed(0, function() {
+                expect($('.feed').html()).not.toEqual(feedContent);
+                done();
+            });
+        });
+    });
         
 }());
